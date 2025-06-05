@@ -83,10 +83,9 @@ class AssetVideoScrollView: UIScrollView {
     }
 
     private func setContentSize(for asset: AVAsset) -> CGSize {
-
-        let contentWidthFactor = CGFloat(max(1, asset.duration.seconds / maxDuration))
+        // Always show the full video in one view, no scrolling
         widthConstraint?.isActive = false
-        widthConstraint = contentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: contentWidthFactor)
+        widthConstraint = contentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0)
         widthConstraint?.isActive = true
         layoutIfNeeded()
         return contentView.bounds.size
