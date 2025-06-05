@@ -27,6 +27,12 @@ class TrimmerViewController: UIViewController,
     private let imagePicker = UIImagePickerController()
     var fetchResult: PHFetchResult<PHAsset>?
 
+    var duration: Double = 0.0 {
+        didSet {
+            selectedDurationLabel.text = String(format: "Selected: %.1f", duration)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImagePicker()
@@ -90,6 +96,8 @@ class TrimmerViewController: UIViewController,
         self.trimmerView.delegate = self
         self.addVideoPlayer(with: asset, playerView: self.playerView)
         self.exportButton.isEnabled = true
+        self.duration = (trimmerView.endTime! - trimmerView.startTime!).seconds
+
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -255,7 +263,7 @@ extension TrimmerViewController: TrimmerViewDelegate {
         stopPlaybackTimeChecker()
         player?.pause()
         player?.seek(to: playerTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-        let duration = (trimmerView.endTime! - trimmerView.startTime!).seconds
+        duration = (trimmerView.endTime! - trimmerView.startTime!).seconds
         print(duration)
     }
 }
