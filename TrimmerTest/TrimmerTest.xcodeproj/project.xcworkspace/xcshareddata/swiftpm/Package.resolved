@@ -1,0 +1,15 @@
+{
+  "originHash" : "e52d9c0ff05085d755dec7e87f9d14e416d31fc48fc030c70e212bfc8bba23d4",
+  "pins" : [
+    {
+      "identity" : "prynttrimmerview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/HHK1/PryntTrimmerView.git",
+      "state" : {
+        "revision" : "ac1b60a22c7e6a6514de7a66d2f3d5b537c956d5",
+        "version" : "4.0.2"
+      }
+    }
+  ],
+  "version" : 3
+}

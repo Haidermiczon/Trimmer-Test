@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrimmerViewController" customModule="TrimmerTest" customModuleProvider="target">
+            <connections>
+                <outlet property="exportButton" destination="b3h-Bl-Sdi" id="t4E-H3-3hF"/>
+                <outlet property="pickButton" destination="N6z-c5-gdy" id="Ajz-7c-B50"/>
+                <outlet property="playButton" destination="4Ar-G3-ljh" id="Ohj-Bc-A0m"/>
+                <outlet property="playerView" destination="Cpd-Ve-sMG" id="XxS-ut-nRw"/>
+                <outlet property="selectedDurationLabel" destination="egF-x9-UpB" id="wLZ-9Z-eeK"/>
+                <outlet property="trimmerView" destination="q6s-7t-Pi9" id="bIa-5W-nza"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbg-hc-sZB">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpd-Ve-sMG" userLabel="Player View">
+                            <rect key="frame" x="8" y="59" width="377" height="581.66666666666663"/>
+                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6s-7t-Pi9" customClass="TrimmerView" customModule="PryntTrimmerView">
+                            <rect key="frame" x="32" y="684.66666666666663" width="329" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="p6e-5V-NeF"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="handleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="maskColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="h5h-Pq-fdg">
+                            <rect key="frame" x="32" y="760.66666666666663" width="329" height="33.333333333333371"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ar-G3-ljh">
+                                    <rect key="frame" x="0.0" y="0.0" width="96.333333333333329" height="33.333333333333336"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <state key="normal" title="Play">
+                                        <color key="titleColor" systemColor="darkTextColor"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="tinted" title="Play">
+                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="baseForegroundColor" systemColor="darkTextColor"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="didTapPlayButton:" destination="-1" eventType="touchUpInside" id="M1g-CP-go3"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3h-Bl-Sdi" userLabel="Export">
+                                    <rect key="frame" x="116.33333333333334" y="0.0" width="96.333333333333343" height="33.333333333333336"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <state key="normal" title="Export">
+                                        <color key="titleColor" systemColor="darkTextColor"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="tinted" title="Export">
+                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="baseForegroundColor" systemColor="darkTextColor"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="didTapPlayButton:" destination="-1" eventType="touchUpInside" id="0HD-4e-K5I"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6z-c5-gdy" userLabel="Select Asset Button">
+                                    <rect key="frame" x="232.66666666666671" y="0.0" width="96.333333333333343" height="33.333333333333336"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <state key="normal" title="Pick">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="tinted" title="Pick">
+                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="didTapPickButton:" destination="-1" eventType="touchUpInside" id="9Np-MO-gFe"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egF-x9-UpB">
+                            <rect key="frame" x="319.66666666666669" y="656.33333333333337" width="41.333333333333314" height="20.333333333333371"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Cpd-Ve-sMG" secondAttribute="trailing" constant="8" id="G2r-vi-pMO"/>
+                        <constraint firstItem="q6s-7t-Pi9" firstAttribute="leading" secondItem="vbg-hc-sZB" secondAttribute="leading" constant="32" id="GNq-vE-P3J"/>
+                        <constraint firstItem="Cpd-Ve-sMG" firstAttribute="leading" secondItem="vbg-hc-sZB" secondAttribute="leading" constant="8" id="Rd7-du-JbG"/>
+                        <constraint firstItem="h5h-Pq-fdg" firstAttribute="top" secondItem="q6s-7t-Pi9" secondAttribute="bottom" constant="20" id="TG3-X1-WBg"/>
+                        <constraint firstAttribute="bottom" secondItem="h5h-Pq-fdg" secondAttribute="bottom" constant="58" id="XiK-wq-AbY"/>
+                        <constraint firstItem="egF-x9-UpB" firstAttribute="trailing" secondItem="q6s-7t-Pi9" secondAttribute="trailing" id="ZTF-xR-O1f"/>
+                        <constraint firstItem="h5h-Pq-fdg" firstAttribute="leading" secondItem="vbg-hc-sZB" secondAttribute="leading" constant="32" id="fZI-Iy-YDL"/>
+                        <constraint firstItem="q6s-7t-Pi9" firstAttribute="top" secondItem="Cpd-Ve-sMG" secondAttribute="bottom" constant="44" id="fcm-2F-Odb"/>
+                        <constraint firstItem="q6s-7t-Pi9" firstAttribute="top" secondItem="egF-x9-UpB" secondAttribute="bottom" constant="8" id="fop-Mc-8zs"/>
+                        <constraint firstAttribute="trailing" secondItem="q6s-7t-Pi9" secondAttribute="trailing" constant="32" id="li6-dq-Efe"/>
+                        <constraint firstAttribute="trailing" secondItem="h5h-Pq-fdg" secondAttribute="trailing" constant="32" id="yDa-Ag-NJz"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="vbg-hc-sZB" secondAttribute="bottom" id="0Jl-en-TOm"/>
+                <constraint firstItem="vbg-hc-sZB" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="8xH-QF-Yh9"/>
+                <constraint firstItem="vbg-hc-sZB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WL9-UL-nfu"/>
+                <constraint firstItem="vbg-hc-sZB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cUT-XK-7Sg"/>
+                <constraint firstItem="Cpd-Ve-sMG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ymC-ko-eAs"/>
+            </constraints>
+            <point key="canvasLocation" x="139.69465648854961" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
