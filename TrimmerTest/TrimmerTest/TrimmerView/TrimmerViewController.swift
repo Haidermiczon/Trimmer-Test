@@ -77,7 +77,11 @@ class TrimmerViewController: UIViewController,
     }
    
     @IBAction func didTapPlayButton(_ sender: Any) {
-        
+        if player?.isPlaying == true {
+            player?.pause()
+            return
+        }
+        player?.play()
     }
     
     // MARK: - UIImagePickerControllerDelegate

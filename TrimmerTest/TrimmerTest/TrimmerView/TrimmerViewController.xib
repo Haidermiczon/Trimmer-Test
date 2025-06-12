@@ -29,7 +29,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpd-Ve-sMG" userLabel="Player View">
-                            <rect key="frame" x="8" y="59" width="377" height="581.66666666666663"/>
+                            <rect key="frame" x="8" y="59" width="377" height="589.66666666666663"/>
                             <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6s-7t-Pi9" customClass="TrimmerView" customModule="PryntTrimmerView">
@@ -93,9 +93,9 @@
                                 </button>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egF-x9-UpB">
-                            <rect key="frame" x="319.66666666666669" y="656.33333333333337" width="41.333333333333314" height="20.333333333333371"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egF-x9-UpB">
+                            <rect key="frame" x="361" y="680.66666666666663" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -109,8 +109,8 @@
                         <constraint firstAttribute="bottom" secondItem="h5h-Pq-fdg" secondAttribute="bottom" constant="58" id="XiK-wq-AbY"/>
                         <constraint firstItem="egF-x9-UpB" firstAttribute="trailing" secondItem="q6s-7t-Pi9" secondAttribute="trailing" id="ZTF-xR-O1f"/>
                         <constraint firstItem="h5h-Pq-fdg" firstAttribute="leading" secondItem="vbg-hc-sZB" secondAttribute="leading" constant="32" id="fZI-Iy-YDL"/>
-                        <constraint firstItem="q6s-7t-Pi9" firstAttribute="top" secondItem="Cpd-Ve-sMG" secondAttribute="bottom" constant="44" id="fcm-2F-Odb"/>
-                        <constraint firstItem="q6s-7t-Pi9" firstAttribute="top" secondItem="egF-x9-UpB" secondAttribute="bottom" constant="8" id="fop-Mc-8zs"/>
+                        <constraint firstItem="q6s-7t-Pi9" firstAttribute="top" secondItem="Cpd-Ve-sMG" secondAttribute="bottom" constant="36" id="fcm-2F-Odb"/>
+                        <constraint firstItem="q6s-7t-Pi9" firstAttribute="top" secondItem="egF-x9-UpB" secondAttribute="bottom" constant="4" id="fop-Mc-8zs"/>
                         <constraint firstAttribute="trailing" secondItem="q6s-7t-Pi9" secondAttribute="trailing" constant="32" id="li6-dq-Efe"/>
                         <constraint firstAttribute="trailing" secondItem="h5h-Pq-fdg" secondAttribute="trailing" constant="32" id="yDa-Ag-NJz"/>
                     </constraints>
