@@ -96,7 +96,7 @@ class TrimmerViewController: UIViewController,
         }
         
         let asset = AVURLAsset(url: url)
-        self.trimmerView.maxDuration = asset.duration.seconds
+//        self.trimmerView.maxDuration = asset.duration.seconds
         self.trimmerView.asset = asset
         self.trimmerView.delegate = self
         self.addVideoPlayer(with: asset, playerView: self.playerView)

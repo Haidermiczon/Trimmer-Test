@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CutViewController" customModule="TrimmerTest" customModuleProvider="target">
+            <connections>
+                <outlet property="exportButton" destination="Isu-Je-ddD" id="qW6-Nl-7ud"/>
+                <outlet property="pickButton" destination="sdy-rY-m1u" id="jGO-iE-i8h"/>
+                <outlet property="playButton" destination="1Dq-Ml-8Ag" id="6cr-FG-jKY"/>
+                <outlet property="playerView" destination="8XW-OV-xcU" id="qtA-tz-RPN"/>
+                <outlet property="selectedDurationLabel" destination="6em-u7-Czc" id="swG-2D-cV5"/>
+                <outlet property="trimmerView" destination="QWt-81-D8f" id="MIz-8k-FbR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DD0-F2-oRD">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XW-OV-xcU" userLabel="Player View">
+                            <rect key="frame" x="8" y="59" width="377" height="589.66666666666663"/>
+                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWt-81-D8f" customClass="TrimmerView" customModule="PryntTrimmerView">
+                            <rect key="frame" x="32" y="684.66666666666663" width="329" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="uvd-1f-gVe"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="handleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="maskColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZO3-vy-PGG">
+                            <rect key="frame" x="32" y="760.66666666666663" width="329" height="33.333333333333371"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Dq-Ml-8Ag">
+                                    <rect key="frame" x="0.0" y="0.0" width="96.333333333333329" height="33.333333333333336"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <state key="normal" title="Play">
+                                        <color key="titleColor" systemColor="darkTextColor"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="tinted" title="Play">
+                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="baseForegroundColor" systemColor="darkTextColor"/>
+                                    </buttonConfiguration>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Isu-Je-ddD" userLabel="Export">
+                                    <rect key="frame" x="116.33333333333334" y="0.0" width="96.333333333333343" height="33.333333333333336"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <state key="normal" title="Export">
+                                        <color key="titleColor" systemColor="darkTextColor"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="tinted" title="Export">
+                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="baseForegroundColor" systemColor="darkTextColor"/>
+                                    </buttonConfiguration>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdy-rY-m1u" userLabel="Select Asset Button">
+                                    <rect key="frame" x="232.66666666666671" y="0.0" width="96.333333333333343" height="33.333333333333336"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <state key="normal" title="Pick">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="tinted" title="Pick">
+                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </buttonConfiguration>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6em-u7-Czc">
+                            <rect key="frame" x="361" y="680.66666666666663" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="6em-u7-Czc" firstAttribute="trailing" secondItem="QWt-81-D8f" secondAttribute="trailing" id="ADj-bp-lBQ"/>
+                        <constraint firstItem="QWt-81-D8f" firstAttribute="top" secondItem="8XW-OV-xcU" secondAttribute="bottom" constant="36" id="Eoc-vy-Znn"/>
+                        <constraint firstItem="ZO3-vy-PGG" firstAttribute="leading" secondItem="DD0-F2-oRD" secondAttribute="leading" constant="32" id="Ji9-L7-XXj"/>
+                        <constraint firstItem="8XW-OV-xcU" firstAttribute="leading" secondItem="DD0-F2-oRD" secondAttribute="leading" constant="8" id="NyA-Ay-N6Y"/>
+                        <constraint firstItem="QWt-81-D8f" firstAttribute="top" secondItem="6em-u7-Czc" secondAttribute="bottom" constant="4" id="VZn-3a-gOy"/>
+                        <constraint firstAttribute="trailing" secondItem="ZO3-vy-PGG" secondAttribute="trailing" constant="32" id="YDO-KU-z7a"/>
+                        <constraint firstAttribute="trailing" secondItem="8XW-OV-xcU" secondAttribute="trailing" constant="8" id="asD-81-vE1"/>
+                        <constraint firstItem="QWt-81-D8f" firstAttribute="leading" secondItem="DD0-F2-oRD" secondAttribute="leading" constant="32" id="fR6-yG-6dp"/>
+                        <constraint firstAttribute="bottom" secondItem="ZO3-vy-PGG" secondAttribute="bottom" constant="58" id="iH5-iG-s4Q"/>
+                        <constraint firstItem="ZO3-vy-PGG" firstAttribute="top" secondItem="QWt-81-D8f" secondAttribute="bottom" constant="20" id="kLm-PO-Xih"/>
+                        <constraint firstAttribute="trailing" secondItem="QWt-81-D8f" secondAttribute="trailing" constant="32" id="xwe-lA-07Z"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="DD0-F2-oRD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="V24-VN-CCi"/>
+                <constraint firstItem="DD0-F2-oRD" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="YyB-Bn-vTw"/>
+                <constraint firstItem="DD0-F2-oRD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hFQ-Ow-xkD"/>
+                <constraint firstAttribute="bottom" secondItem="DD0-F2-oRD" secondAttribute="bottom" id="s96-U7-0Bl"/>
+                <constraint firstItem="8XW-OV-xcU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="vDN-jO-a9C"/>
+            </constraints>
+            <point key="canvasLocation" x="-21" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
