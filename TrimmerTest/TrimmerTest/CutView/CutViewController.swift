@@ -9,10 +9,10 @@ import UIKit
 import AVFoundation
 import PhotosUI
 import MobileCoreServices
-//import AVKit
+import AVKit
 
 class CutViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var trimmerView: TrimmerView!
     @IBOutlet weak var pickButton: UIButton!
@@ -20,8 +20,9 @@ class CutViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var exportButton: UIButton!
     @IBOutlet weak var selectedDurationLabel: UILabel!
     
+    private var debounceWorkItem: DispatchWorkItem?
     var player: AVPlayer?
-//    private var playerViewController: AVPlayerViewController?
+    private var playerViewController: AVPlayerViewController?
     private let imagePicker = UIImagePickerController()
     var fetchResult: PHFetchResult<PHAsset>?
     var duration: Double = 0.0 {
@@ -29,30 +30,30 @@ class CutViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             selectedDurationLabel.text = String(format: "Selected: %.1f", duration)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImagePicker()
         setupUI()
     }
-
+    
     private func setupUI() {
         exportButton.isEnabled = false
         exportButton.setTitle("Export", for: .normal)
         exportButton.addTarget(self, action: #selector(exportButtonTapped), for: .touchUpInside)
     }
-
+    
     private func setupImagePicker() {
         imagePicker.sourceType = .photoLibrary
         imagePicker.mediaTypes = [kUTTypeMovie as String]
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
     }
-
+    
     @IBAction func didTapPickButton(_ sender: Any) {
         present(imagePicker, animated: true)
     }
-
+    
     @IBAction func didTapPlayButton(_ sender: Any) {
         if player?.isPlaying == true {
             player?.pause()
@@ -60,7 +61,7 @@ class CutViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
         player?.play()
     }
-
+    
     // MARK: - UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
@@ -73,26 +74,61 @@ class CutViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         self.trimmerView.maxDuration = asset.duration.seconds
         self.trimmerView.asset = asset
         self.trimmerView.delegate = self
-        self.addVideoPlayer(with: asset, playerView: self.playerView)
+
+        let start = trimmerView.startTime ?? .zero
+        let end = trimmerView.endTime ?? asset.duration
+
+        if let trimmedItem = createPreviewComposition(from: asset, startTime: start, endTime: end) {
+            self.player = AVPlayer(playerItem: trimmedItem)
+
+            // Reuse existing player view controller or create a new one
+            if let playerVC = self.playerViewController {
+                playerVC.player = self.player
+            } else {
+                let playerVC = AVPlayerViewController()
+                playerVC.player = self.player
+                playerVC.showsPlaybackControls = true
+                self.addChild(playerVC)
+                playerVC.view.frame = self.playerView.bounds
+                self.playerView.addSubview(playerVC.view)
+                playerVC.didMove(toParent: self)
+                self.playerViewController = playerVC
+            }
+
+            self.player?.play()
+        }
+
         self.exportButton.isEnabled = true
         self.duration = (trimmerView.endTime! - trimmerView.startTime!).seconds
     }
-
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
-
+    
     private func addVideoPlayer(with asset: AVAsset, playerView: UIView) {
         let playerItem = AVPlayerItem(asset: asset)
         self.player = AVPlayer(playerItem: playerItem)
-        let layer: AVPlayerLayer = AVPlayerLayer(player: self.player)
-        layer.backgroundColor = UIColor.white.cgColor
-        layer.frame = CGRect(x: 0, y: 0, width: playerView.frame.width, height: playerView.frame.height)
-        layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        playerView.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
-        playerView.layer.addSublayer(layer)
+        
+        // Remove old playerViewController if exists
+        playerViewController?.view.removeFromSuperview()
+        playerViewController?.removeFromParent()
+        
+        // Create new playerViewController
+        let playerVC = AVPlayerViewController()
+        playerVC.player = self.player
+        playerVC.showsPlaybackControls = true
+        
+        // Add as child view controller
+        self.addChild(playerVC)
+        playerVC.view.frame = playerView.bounds
+        playerView.addSubview(playerVC.view)
+        playerVC.didMove(toParent: self)
+        
+        self.playerViewController = playerVC
     }
-
+    
+    
     @objc private func exportButtonTapped() {
         guard let asset = trimmerView.asset as? AVURLAsset else {
             print("No video selected")
@@ -162,7 +198,7 @@ class CutViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             }
         }
     }
-
+    
     private func saveVideoToLibrary(_ videoURL: URL) {
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL)
@@ -176,12 +212,46 @@ class CutViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             }
         }
     }
-
+    
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    
+    private func createPreviewComposition(from asset: AVAsset, startTime: CMTime, endTime: CMTime) -> AVPlayerItem? {
+        let videoEnd = asset.duration
+        let composition = AVMutableComposition()
+        
+        guard let videoTrack = asset.tracks(withMediaType: .video).first else { return nil }
+        
+        let compVideoTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
+        
+        // Add [0, startTime]
+        if startTime > .zero {
+            try? compVideoTrack?.insertTimeRange(CMTimeRange(start: .zero, end: startTime), of: videoTrack, at: .zero)
+        }
+        // Add [endTime, videoEnd]
+        if endTime < videoEnd {
+            let atTime = (startTime > .zero) ? startTime : .zero
+            try? compVideoTrack?.insertTimeRange(CMTimeRange(start: endTime, end: videoEnd), of: videoTrack, at: atTime)
+        }
+        
+        // Add audio if available
+        if let audioTrack = asset.tracks(withMediaType: .audio).first {
+            let compAudioTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
+            if startTime > .zero {
+                try? compAudioTrack?.insertTimeRange(CMTimeRange(start: .zero, end: startTime), of: audioTrack, at: .zero)
+            }
+            if endTime < videoEnd {
+                let atTime = (startTime > .zero) ? startTime : .zero
+                try? compAudioTrack?.insertTimeRange(CMTimeRange(start: endTime, end: videoEnd), of: audioTrack, at: atTime)
+            }
+        }
+        
+        return AVPlayerItem(asset: composition)
+    }
+    
 }
 
 extension CutViewController: TrimmerViewDelegate {
@@ -189,9 +259,32 @@ extension CutViewController: TrimmerViewDelegate {
         player?.seek(to: playerTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         player?.play()
     }
+    
     func didChangePositionBar(_ playerTime: CMTime) {
         player?.pause()
         player?.seek(to: playerTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-        duration = (trimmerView.endTime! - trimmerView.startTime!).seconds
+        
+        // Cancel any pending work
+           debounceWorkItem?.cancel()
+           
+           // Create new debounce task
+           let workItem = DispatchWorkItem { [weak self] in
+               guard let self = self else { return }
+               let asset = self.trimmerView.asset!
+               let start = self.trimmerView.startTime!
+               let end = self.trimmerView.endTime!
+
+               if let trimmedItem = self.createPreviewComposition(from: asset, startTime: start, endTime: end) {
+                   self.player = AVPlayer(playerItem: trimmedItem)
+                   self.playerViewController?.player = self.player
+                   self.player?.play()
+               }
+
+               self.duration = (end - start).seconds
+           }
+
+           // Store and schedule the new task
+           debounceWorkItem = workItem
+           DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
     }
 }
