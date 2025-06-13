@@ -59,6 +59,9 @@
                                         <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="baseForegroundColor" systemColor="darkTextColor"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="didTapPlayButton:" destination="-1" eventType="touchUpInside" id="73H-s2-exC"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Isu-Je-ddD" userLabel="Export">
                                     <rect key="frame" x="116.33333333333334" y="0.0" width="96.333333333333343" height="33.333333333333336"/>
@@ -81,6 +84,9 @@
                                         <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="didTapPickButton:" destination="-1" eventType="touchUpInside" id="C4s-s5-Rh9"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>
