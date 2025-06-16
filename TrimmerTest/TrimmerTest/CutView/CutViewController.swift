@@ -72,6 +72,7 @@ class CutViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
         let asset = AVURLAsset(url: url)
         self.trimmerView.maxDuration = asset.duration.seconds
+//        self.trimmerView.maskingMode = .dimSelectedArea
         self.trimmerView.asset = asset
         self.trimmerView.delegate = self
 
